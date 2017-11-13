@@ -52,6 +52,11 @@ CFLAGS = ['/WX'] if WINDOWS else [#'-Wpointer-arith',
                                   #'-Werror',
                                   '-fno-strict-aliasing']
 
+LINK_FLAGS = [
+    '-L' + sysconfig.get_config_var('LIBPL'),
+    '-Wl,-rpath', sysconfig.get_config_var('LIBPL'),
+] if os.getenv('CONDA_PREFIX', '') == '' else []
+
 TEST_REQUIREMENTS = [
     'pytest>=2.6.4,!=3.2.0',
     'pytest-pyq',
@@ -84,9 +89,7 @@ METADATA = dict(
                       '-DDY="%s"' % sysconfig.get_config_var('LDLIBRARY'),
                       '-DRP=1',
                   ],
-                  extra_link_args=[
-                      '-L' + sysconfig.get_config_var('LIBPL'),
-                      '-Wl,-rpath', sysconfig.get_config_var('LIBPL'),
+                  extra_link_args=LINK_FLAGS + [
                       '-lpython' + sysconfig.get_config_var('LDVERSION'),
                   ]),
     ],
