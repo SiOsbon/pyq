@@ -71,7 +71,7 @@ METADATA = dict(
                   extra_compile_args=CFLAGS),
     ],
     qext_modules=[
-        Extension('p', sources=['src/pyq/p.c', ],
+        Extension('pyq', sources=['src/pyq/pyq.c', ],
                   extra_compile_args=CFLAGS),
     ],
     executables=[] if WINDOWS else [
