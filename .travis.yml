@@ -29,6 +29,7 @@ install:
   - export QHOME=$CONDA_PREFIX/q
   #
   - conda install pytest
+  - conda install numpy
   - pip install pytest-pyq
   - if [[ "$TRAVIS_PYTHON_VERSION" == "3.6" ]]; then
       echo "[config]" > setup.cfg;
